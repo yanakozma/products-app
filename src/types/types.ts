@@ -10,3 +10,8 @@ export interface Product {
 export interface ProductApiResponse {
     products: Product[];
 }
+
+export interface ProductState {
+    data: Product[];
+    isLoading: boolean;
+}
