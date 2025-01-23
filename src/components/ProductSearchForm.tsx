@@ -3,13 +3,14 @@ import * as Yup from "yup";
 import {ProductFormProps} from "../types/types.ts";
 import {useSelector} from "react-redux";
 import {RootState} from "../store/store.ts";
-import {Box,Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {Box, Button, FormControl, InputLabel, Select, MenuItem} from "@mui/material";
 import TextField from "@mui/material/TextField";
-
+import {useTranslation} from "react-i18next";
 
 
 const ProductSearchForm = ({search, initialValues, filterCategory}: ProductFormProps) => {
-    const { categories }: {categories: string[]} = useSelector((state: RootState) => state.products);
+    const {categories}: { categories: string[] } = useSelector((state: RootState) => state.products);
+    const {t} = useTranslation();
 
     const formik = useFormik({
         initialValues: initialValues,
@@ -41,7 +42,7 @@ const ProductSearchForm = ({search, initialValues, filterCategory}: ProductFormP
                     fullWidth
                     type="text"
                     name="productName"
-                    placeholder="Enter a product name..."
+                    placeholder={t("form.enterProductName")}
                     value={formik.values.productName}
                     onChange={formik.handleChange}
                     error={formik.touched.productName && Boolean(formik.errors.productName)}
@@ -55,12 +56,12 @@ const ProductSearchForm = ({search, initialValues, filterCategory}: ProductFormP
                     }}
                 />
                 <Button variant="outlined" type="submit" sx={{width: "30%", height: "100%"}}>
-                    Search
+                    {t("form.search")}
                 </Button>
             </Box>
-            <Box sx={{ width: 300 }}>
+            <Box sx={{width: 300}}>
                 <FormControl fullWidth>
-                    <InputLabel id="category-label">Category</InputLabel>
+                    <InputLabel id="category-label">{t("form.category")}</InputLabel>
                     <Select
                         labelId="category-label"
                         id="category"

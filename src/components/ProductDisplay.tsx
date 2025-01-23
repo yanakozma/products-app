@@ -7,12 +7,14 @@ import {Typography, Box, CardMedia} from "@mui/material";
 import {Alert, AlertTitle} from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import {fetchProductsRequest} from "../store/actions/productActions.ts";
+import {useTranslation} from "react-i18next";
 
 
 export default function ProductDisplay() {
     const {asin} = useParams<{ asin: string }>();
     const dispatch = useDispatch();
     const {data: products, isLoading, error} = useSelector((state: RootState) => state.products);
+    const {t} = useTranslation();
 
     useEffect(() => {
         if (products.length === 0) {
@@ -45,7 +47,7 @@ export default function ProductDisplay() {
             >
                 <Alert
                     severity="error"
-                    icon={<ErrorOutlineIcon />}
+                    icon={<ErrorOutlineIcon/>}
                     sx={{
                         maxWidth: 600,
                         width: "100%",
@@ -76,7 +78,7 @@ export default function ProductDisplay() {
             >
                 <Alert
                     severity="error"
-                    icon={<ErrorOutlineIcon />}
+                    icon={<ErrorOutlineIcon/>}
                     sx={{
                         maxWidth: 600,
                         width: "100%",
@@ -88,8 +90,8 @@ export default function ProductDisplay() {
                         color: "#721c24",
                     }}
                 >
-                    <AlertTitle>Product Not Found</AlertTitle>
-                    We couldn't find the product you are looking for. Please check the URL or try again later.
+                    <AlertTitle>{t("error.notFound")}</AlertTitle>
+                    {t("error.notFoundSpecificProduct")}
                 </Alert>
             </Box>
         );
@@ -123,25 +125,25 @@ export default function ProductDisplay() {
                 </Typography>
 
                 <Typography variant="h6" color="primary">
-                    Price: ${product.price}
+                    {t("product.price")}: ${product.price}
                 </Typography>
 
                 <Box>
                     <Typography variant="body1" color="text.secondary">
-                        <strong>Brand:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                        <strong>{t("product.brand")}:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
-                        <strong>Color:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                        <strong>{t("product.color")}:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
-                        <strong>Form Factor:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                        <strong>{t("product.formFactor")}:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
                         <strong>ASIN:</strong> {product.asin}
                     </Typography>
                 </Box>
                 <Typography variant="body2" color="text.secondary">
-                    <strong>About this item:</strong>
+                    <strong>{t("product.description")}:</strong>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur deleniti dolore
                     dolorem, doloremque dolores eligendi iure maiores, obcaecati, placeat quasi quisquam reiciendis
                     repellat saepe tempore. Ex nemo qui quia. Lorem ipsum dolor sit amet, consectetur adipisicing elit.

@@ -8,12 +8,14 @@ import ProductSearchForm from "./ProductSearchForm.tsx";
 import {filterProducts} from "../utils/filterProducts.ts";
 import {Box, Card, CardContent, CardMedia, Typography, Button} from "@mui/material";
 import {fetchProductsRequest} from "../store/actions/productActions.ts";
+import {useTranslation} from "react-i18next";
 
 
 
 const ProductCardWithSearch = () => {
     const dispatch = useDispatch();
     const {data: products, isLoading} = useSelector((state: RootState) => state.products);
+    const { t } = useTranslation("translation");
 
     useEffect(() => {
         dispatch(fetchProductsRequest());
@@ -76,7 +78,7 @@ const ProductCardWithSearch = () => {
                     ))
                 ) : (
                     <Typography align="center" variant="h6" sx={{width: "100%"}}>
-                        Product not found
+                        {t("error.notFound")}
                     </Typography>
                 )}
             </Box>
@@ -85,6 +87,7 @@ const ProductCardWithSearch = () => {
 };
 
 const ProductCard = ({product}: { product: Product }) => {
+    const { t } = useTranslation("translation");
     const [expanded, setExpanded] = useState(false);
     return (
         <Card
@@ -127,7 +130,7 @@ const ProductCard = ({product}: { product: Product }) => {
                 </Typography>
                 {product.name.length > 25 && (
                     <Button sx={{color: "gray"}} size="small" onClick={() => setExpanded(!expanded)}>
-                        {expanded ? "Read Less" : "Read More"}
+                        {expanded ? t("product.readLess") : t("product.readMore")}
                     </Button>
                 )}
                 <Typography color="textSecondary">{product.bsr_category}</Typography>
@@ -144,7 +147,7 @@ const ProductCard = ({product}: { product: Product }) => {
                 size="small"
                 sx={{m: 1, color: "gray", fontWeight: "bold"}}
             >
-                View Product
+                {t("product.viewProduct")}
             </Button>
         </Card>
     );

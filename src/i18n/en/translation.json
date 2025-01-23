@@ -1,0 +1,21 @@
+{
+  "error": {
+    "notFound": "Product not found",
+    "notFoundSpecificProduct": "We couldn't find the product you are looking for. Please check the URL or try again later"
+  },
+  "product": {
+    "viewProduct": "View Product",
+    "readMore": "Read More",
+    "readLess": "Read Less",
+    "price": "Price",
+    "brand": "Brand",
+    "color": "Color",
+    "formFactor": "Form Factor",
+    "description": "About this Item"
+  },
+  "form": {
+    "enterProductName": "Enter a product name...",
+    "search": "Search",
+    "category": "Category"
+  }
+}
