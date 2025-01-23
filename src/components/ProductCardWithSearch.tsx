@@ -1,8 +1,11 @@
-import {Product, ProductState} from "../types/types.ts";
 import {useEffect, useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {fetchProducts} from "../store/actions/productActions";
+import {RootState} from "../store/store.ts";
+import {Link} from "react-router-dom";
+import {useQueryParams, StringParam} from 'use-query-params';
+import {Product} from "../types/types.ts";
 import ProductSearchForm from "./ProductSearchForm.tsx";
-import SelectCategory from "./SelectCategory.tsx";
-import {useFetchProducts} from "../hooks/useFetchProducts.ts";
 import {filterProducts} from "../utils/filterProducts.ts";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -13,32 +16,39 @@ import Button from "@mui/material/Button";
 
 
 const ProductCardWithSearch = () => {
-    const {products, categories} = useFetchProducts();
-    const [filteredProducts, setFilteredProducts] = useState<ProductState>({ data: [], isLoading: true });
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const dispatch = useDispatch();
+    const {data: products, isLoading} = useSelector((state: RootState) => state.products);
+
+    const [query, setQuery] = useQueryParams({
+        search: StringParam,
+        category: StringParam,
+    });
+
+    const searchQuery = query.search || "";
+    const selectedCategory = query.category || "";
 
 
     useEffect(() => {
-        if (products.isLoading || products.data.length === 0) return;
+        dispatch(fetchProducts());
+    }, [dispatch]);
 
-        if (!searchQuery && !selectedCategory) {
-            setFilteredProducts({data: products.data, isLoading: false});
-        } else {
-            const updatedProducts = filterProducts(products.data, searchQuery, selectedCategory);
-            setFilteredProducts({data: updatedProducts, isLoading: false});
-        }
-    }, [searchQuery, selectedCategory, products.data]);
+    const filteredProducts = filterProducts(products, searchQuery, selectedCategory);
 
 
     const search = (productName: string) => {
-        setSearchQuery(productName.toLowerCase());
+        setQuery({
+            search: productName || undefined,
+            category: selectedCategory || undefined,
+        });
     };
     const filterCategory = (category: string) => {
-        setSelectedCategory(category === "all" ? "" : category)
+        setQuery({
+            search: searchQuery || undefined,
+            category: category || undefined,
+        });
     };
 
-    if (filteredProducts.isLoading)
+    if (isLoading)
         return (
             <Typography
                 align="center"
@@ -50,16 +60,21 @@ const ProductCardWithSearch = () => {
         );
 
 
-
     return (
         <Box sx={{p: 4, width: "100%"}}>
             <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", gap: 8}}>
-                <ProductSearchForm search={search}/>
-                <SelectCategory categories={categories} filterCategory={filterCategory}/>
+                <ProductSearchForm
+                    filterCategory={filterCategory}
+                    search={search}
+                    initialValues={{
+                        productName: searchQuery,
+                        category: selectedCategory,
+                    }}
+                />
             </Box>
             <Box sx={{display: "flex", p: 4, gap: 4, flexWrap: "wrap", justifyContent: "center"}}>
-                {filteredProducts.data.length > 0 ? (
-                    filteredProducts.data.map((product, index) => (
+                {filteredProducts.length > 0 ? (
+                    filteredProducts.map((product, index) => (
                         <ProductCard key={index} product={product}/>
                     ))
                 ) : (
@@ -126,7 +141,12 @@ const ProductCard = ({product}: { product: Product }) => {
                     <strong>ASIN:</strong> {product.asin}
                 </Typography>
             </CardContent>
-            <Button href={product.link} size="small" sx={{m: 1, color: "gray", fontWeight: "bold"}}>
+            <Button
+                component={Link}
+                to={`/product/${product.asin}`}
+                size="small"
+                sx={{m: 1, color: "gray", fontWeight: "bold"}}
+            >
                 View Product
             </Button>
         </Card>

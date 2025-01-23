@@ -11,7 +11,15 @@ export interface ProductApiResponse {
     products: Product[];
 }
 
-export interface ProductState {
+export interface ProductFormProps {
+    search: (productName: string) => void;
+    initialValues: { productName: string; category: string };
+    filterCategory: (category: string) => void;
+}
+
+export interface InitialStateReducer {
     data: Product[];
+    categories: string[];
     isLoading: boolean;
+    error: string | null;
 }
