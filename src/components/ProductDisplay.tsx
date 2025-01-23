@@ -1,14 +1,12 @@
 import {useParams} from "react-router-dom";
 import {Product} from "../types/types.ts";
 import {useEffect} from "react";
-import {fetchProducts} from "../store/actions/productActions.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/store.ts";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import CardMedia from "@mui/material/CardMedia";
+import {Typography, Box, CardMedia} from "@mui/material";
 import {Alert, AlertTitle} from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import {fetchProductsRequest} from "../store/actions/productActions.ts";
 
 
 export default function ProductDisplay() {
@@ -18,7 +16,7 @@ export default function ProductDisplay() {
 
     useEffect(() => {
         if (products.length === 0) {
-            dispatch(fetchProducts());
+            dispatch(fetchProductsRequest());
         }
     }, [dispatch, products.length]);
 

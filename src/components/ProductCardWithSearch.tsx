@@ -1,23 +1,23 @@
 import {useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {fetchProducts} from "../store/actions/productActions";
 import {RootState} from "../store/store.ts";
 import {Link} from "react-router-dom";
 import {useQueryParams, StringParam} from 'use-query-params';
 import {Product} from "../types/types.ts";
 import ProductSearchForm from "./ProductSearchForm.tsx";
 import {filterProducts} from "../utils/filterProducts.ts";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import {Box, Card, CardContent, CardMedia, Typography, Button} from "@mui/material";
+import {fetchProductsRequest} from "../store/actions/productActions.ts";
+
 
 
 const ProductCardWithSearch = () => {
     const dispatch = useDispatch();
     const {data: products, isLoading} = useSelector((state: RootState) => state.products);
+
+    useEffect(() => {
+        dispatch(fetchProductsRequest());
+    }, [dispatch]);
 
     const [query, setQuery] = useQueryParams({
         search: StringParam,
@@ -28,9 +28,6 @@ const ProductCardWithSearch = () => {
     const selectedCategory = query.category || "";
 
 
-    useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
 
     const filteredProducts = filterProducts(products, searchQuery, selectedCategory);
 
@@ -134,7 +131,7 @@ const ProductCard = ({product}: { product: Product }) => {
                     </Button>
                 )}
                 <Typography color="textSecondary">{product.bsr_category}</Typography>
-                <Typography variant="body1" color="red" sx={{fontWeight: "bold"}}>
+                <Typography variant="body1" color="primary" sx={{fontWeight: "bold"}}>
                     ${product.price}
                 </Typography>
                 <Typography variant="body2">

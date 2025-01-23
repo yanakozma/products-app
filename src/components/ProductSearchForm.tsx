@@ -3,13 +3,9 @@ import * as Yup from "yup";
 import {ProductFormProps} from "../types/types.ts";
 import {useSelector} from "react-redux";
 import {RootState} from "../store/store.ts";
-import Box from "@mui/material/Box";
+import {Box,Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+
 
 
 const ProductSearchForm = ({search, initialValues, filterCategory}: ProductFormProps) => {
