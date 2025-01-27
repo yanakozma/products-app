@@ -16,6 +16,6 @@
   "form": {
     "enterProductName": "Введіть назву товару...",
     "search": "Пошук",
-    "category": "Категорія"
+    "selectCategory": "Оберіть категорію товару"
   }
 }

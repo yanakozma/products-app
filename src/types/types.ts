@@ -12,14 +12,14 @@ export interface ProductApiResponse {
 }
 
 export interface ProductFormProps {
-    search: (productName: string) => void;
-    initialValues: { productName: string; category: string };
+    search: (productName: string | undefined) => void;
+    initialValues: { productName?: string; category: string };
     filterCategory: (category: string) => void;
 }
 
-export interface InitialStateReducer {
-    data: Product[];
-    categories: string[];
-    isLoading: boolean;
-    error: string | null;
-}
+// export interface InitialStateReducer {
+//     data: Product[];
+//     categories: string[];
+//     isLoading: boolean;
+//     error: string | null;
+// }

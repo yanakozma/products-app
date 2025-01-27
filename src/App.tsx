@@ -1,16 +1,14 @@
 import {BrowserRouter, Routes, Route} from "react-router";
-import ProductCardWithSearch from "./ProductCardWithSearch.tsx";
-import ProductDisplay from "./ProductDisplay.tsx";
+import ProductCardWithSearch from "./components/ProductCardWithSearch/ProductCardWithSearch.tsx";
+import ProductDisplay from "./components/ProductDisplay/ProductDisplay.tsx";
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
-import {CssBaseline} from "@mui/material";
-import LanguageSwitcher from "./LanguageSwitcher.tsx";
+import LanguageSwitcher from "./components/LanguageSwitcher/LanguageSwitcher.tsx";
 
 function App() {
     return (
         <>
             <BrowserRouter>
-                <CssBaseline/>
                 <LanguageSwitcher/>
                 <QueryParamProvider
                     adapter={ReactRouter6Adapter}

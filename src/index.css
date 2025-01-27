@@ -1,10 +1,33 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ... */
+
+@layer base {
+  :root {
+    --gray-0: #ffffff;
+    --gray-5: #f8f8f8;
+    --gray-10: #f9f9f9;
+    --gray-25: #dedede;
+    --gray-70: #5b5b5b;
+
+    --blue-5: #a9d6e5;
+    --blue-10: #89c2d9;
+    --blue-20: #468faf;
+    --blue-30: #014f86;
+    --blue-40: #012a4a;
+
+    --radius: 0.5rem;
+  }
 }
+
+body {
+  @apply bg-gray-5  min-h-screen;
+}
+
+
+
 
 
 

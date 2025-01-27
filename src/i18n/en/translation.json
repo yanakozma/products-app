@@ -16,6 +16,6 @@
   "form": {
     "enterProductName": "Enter a product name...",
     "search": "Search",
-    "category": "Category"
+    "selectCategory": "Select product category"
   }
 }
