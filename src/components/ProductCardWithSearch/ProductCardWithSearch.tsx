@@ -52,7 +52,8 @@ const ProductCardWithSearch = () => {
         );
 
     return (
-        <div className="p-5">
+        <div className="pt-[120px] min-h-screen p-5">
+
             <ProductSearchForm
                 filterCategory={filterCategory}
                 search={search}
@@ -70,6 +71,7 @@ const ProductCardWithSearch = () => {
                     <div className="text-center m-10 font-medium">{t("error.notFound")}</div>
                 )}
             </div>
+
         </div>
     );
 };
@@ -79,7 +81,7 @@ const ProductCard = ({product}: { product: Product }) => {
     const [expanded, setExpanded] = useState(false);
     return (
         <div
-            className="w-[300px] mt-1 p-3 flex flex-col justify-between gap-2 border border-gray-500r shadow rounded-md hover:scale-105 hover:shadow-md duration-300 bg-white">
+            className="w-[300px] mt-1 p-6 flex flex-col justify-between gap-2 border border-gray-25 shadow rounded-md hover:scale-105 hover:shadow-md duration-300 bg-gray-0">
             <div className="h-[250px] w-full flex justify-center items-center">
                 <img src={product.img} alt={product.img} className="object-contain h-full max-h-full w-auto"/>
             </div>

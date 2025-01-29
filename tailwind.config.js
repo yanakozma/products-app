@@ -5,12 +5,16 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
     theme: {
     	extend: {
+			backgroundImage: {
+				'home-page': "linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('/background-image.png')"
+			},
 			colors: {
 				gray: {
 					0: "var(--gray-0)",
 					5: "var(--gray-5)",
 					10: "var(--gray-10)",
 					25: "var(--gray-25)",
+					50: "var(--gray-50)",
 					70: "var(--gray-70)",
 				},
 				blue: {

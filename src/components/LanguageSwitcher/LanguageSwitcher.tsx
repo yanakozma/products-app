@@ -6,14 +6,12 @@ const LanguageSwitcher = () => {
 
     const changeLanguage = (lng: string) => {
         i18n.changeLanguage(lng);
-        console.log('Active Language:', i18n.language);
-
     };
 
     return (
-        <div className= "text-end mt-2 mr-3" >
-            <Button variant="primary" size="sm" onClick={() => changeLanguage('en')}>English</Button>
-            <Button variant="primary" size="sm" onClick={() => changeLanguage('uk')}>Українська</Button>
+        <div className= "text-end m-2 mr-3" >
+            <Button variant="ghost" size="sm" onClick={() => changeLanguage('en')}>English</Button>
+            <Button variant="ghost" size="sm" onClick={() => changeLanguage('uk')}>Українська</Button>
         </div>
     );
 };

@@ -3,19 +3,19 @@ import ProductCardWithSearch from "./components/ProductCardWithSearch/ProductCar
 import ProductDisplay from "./components/ProductDisplay/ProductDisplay.tsx";
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
-import LanguageSwitcher from "./components/LanguageSwitcher/LanguageSwitcher.tsx";
+import HomePage from "@/components/HomePage/HomePage.tsx";
+import MainHeader from "./components/MainHeader/MainHeader.tsx";
 
 function App() {
     return (
         <>
             <BrowserRouter>
-                <LanguageSwitcher/>
-                <QueryParamProvider
-                    adapter={ReactRouter6Adapter}
-                >
+                <MainHeader />
+                <QueryParamProvider adapter={ReactRouter6Adapter}>
                 <Routes>
-                    <Route path="/" element={<ProductCardWithSearch/>}/>
-                    <Route path="/product/:asin" element={<ProductDisplay/>}/>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/product" element={<ProductCardWithSearch />} />
+                    <Route path="/product/:asin" element={<ProductDisplay />} />
                 </Routes>
                 </QueryParamProvider>
             </BrowserRouter>

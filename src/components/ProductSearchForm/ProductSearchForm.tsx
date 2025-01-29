@@ -20,6 +20,7 @@ import {
     SelectValue,
 } from "@/components/ui/select.tsx"
 import {useFetchProductsQuery} from "@/store/productsApi";
+import { Search } from "lucide-react";
 
 
 
@@ -58,23 +59,28 @@ const ProductSearchForm = ({search, initialValues, filterCategory}: ProductFormP
                         render={({field}) => (
                             <FormItem className="h-full">
                                 <FormControl>
+                                    <div className="relative">
                                     <Input
                                         {...field}
                                         placeholder={t("form.enterProductName")}
-                                        className="w-[400px]"
+                                        className="w-[400px] h-[52px] pl-10"
                                         />
+                                    <button className="absolute left-2.5 top-[30%]" type="button">
+                                        <Search/>
+                                    </button>
+                                    </div>
                                 </FormControl>
                                 <FormMessage/>
                             </FormItem>
                         )}
                     />
-                    <Button className="h-full w-40" type="submit">{t("form.search")}</Button>
+                    <Button variant="primary" className="h-full w-32" type="submit">{t("form.search")}</Button>
                 </div>
                 <FormField
                     control={form.control}
                     name="category"
                     render={({field}) => (
-                        <FormItem className="w-[400px] h-full">
+                        <FormItem className="w-[500px] h-full">
                             <Select
                                 onValueChange={(value) => {
                                     field.onChange(value);

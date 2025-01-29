@@ -1,4 +1,16 @@
 {
+  "home": {
+    "welcome": "Welcome To Our Amazon Products",
+    "discover": "Discover the best products curated for you.",
+    "exploreProducts": "Explore Products",
+    "fastShipping": "Fast Shipping",
+    "fastShippingDesc": "Get your products delivered in record time.",
+    "qualityProducts": "Quality Products",
+    "qualityProductsDesc": "Only the best, verified by customer reviews.",
+    "customerSupport": "24/7 Customer Support",
+    "customerSupportDesc": "We're here to help you at any time.",
+    "allRightsReserved": "All rights reserved."
+  },
   "error": {
     "notFound": "Product not found",
     "notFoundSpecificProduct": "We couldn't find the product you are looking for. Please check the URL or try again later"
